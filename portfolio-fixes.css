@@ -279,3 +279,25 @@ h1, h2, h3, h4, h5, h6 { font-family: "Poppins", "Inter", "Segoe UI", system-ui,
 #Contact .contact-wa-monogram { font-size: .79rem; letter-spacing: .03em; font-weight: 850; }
 #Contact, #Contact *, .contact-heading, .contact-heading * { font-family: "Poppins", "Inter", "Segoe UI", system-ui, -apple-system, sans-serif !important; }
 #Portofolio, #Portofolio * { font-family: "Poppins", "Inter", "Segoe UI", system-ui, -apple-system, sans-serif !important; }
+
+/* Email composition fallback: never claim a message was sent on a static site. */
+#Contact .contact-compose-feedback {
+  margin-top: 15px; padding: 17px 18px; border-radius: 14px;
+  border: 1px solid rgba(165,180,252,.32);
+  background: rgba(60, 52, 106, .29); color: #e9e5ff;
+  line-height: 1.65; font-size: .91rem;
+}
+#Contact .contact-compose-feedback > strong { display:block; font-size: 1rem; }
+#Contact .contact-compose-feedback p { margin: 7px 0 0; color: #cbd5e1; }
+#Contact .contact-compose-actions {
+  display:flex; flex-wrap:wrap; gap: 10px; margin-top: 15px;
+}
+#Contact .contact-compose-actions a {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height: 40px; padding: 9px 15px; text-decoration:none;
+  border: 1px solid rgba(167,139,250,.43); border-radius:10px;
+  color: #f7f3ff; background: rgba(107,90,196,.24);
+  font-size: .88rem; font-weight:650; transition: background .18s ease;
+}
+#Contact .contact-compose-actions a:hover { background: rgba(139,92,246,.4); }
+#Contact .contact-compose-actions a:focus-visible {outline:2px solid #c4b5fd;outline-offset:3px;}
