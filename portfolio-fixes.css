@@ -1,0 +1,120 @@
+/* Desktop, mobile and tab content fixes. Loaded after the bundled Tailwind stylesheet. */
+:root { color-scheme: dark; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body, #root { min-width: 0; width: 100%; max-width: 100%; overflow-x: clip; }
+#root img { max-width: 100%; }
+#Home, #About, #Portofolio, #Contact { scroll-margin-top: 90px; }
+#Home { min-height: 100svh; }
+#Home > div, #Home .container { min-width: 0; }
+#Home .dotlottie-container { max-width: 100%; }
+/* AOS should be visual enhancement, never a prerequisite for showing content. */
+#Home [data-aos], #About [data-aos], #Contact [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+#Home .lottie-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+  color: #c4b5fd;
+  isolation: isolate;
+}
+#Home .lottie-fallback::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(72%, 380px);
+  aspect-ratio: 1;
+  border-radius: 34%;
+  border: 1px solid rgba(165, 180, 252, .22);
+  background: radial-gradient(circle, rgba(79,70,229,.24), rgba(88,28,135,.06) 70%, transparent);
+  transform: rotate(-13deg);
+  box-shadow: 0 0 60px rgba(76,29,149,.12), inset 0 0 75px rgba(99,102,241,.10);
+}
+#Home .lottie-fallback svg { width: clamp(70px, 11vw, 140px); height: auto; stroke-width: 1.15; opacity: .72; }
+#Home .lottie-fallback > span { font-size: clamp(1rem, 2vw, 1.6rem); font-weight: 700; letter-spacing: .22em; }
+#Home .lottie-fallback > small { color: #a5b4fc; font-size: clamp(.62rem, .85vw, .8rem); letter-spacing: .12em; }
+
+
+/* Ensure content inside animated tabs never remains invisible after tab switch. */
+#Portofolio [data-aos] { opacity: 1 !important; transform: none !important; }
+#Portofolio { overflow: visible !important; min-width: 0; padding-bottom: clamp(30px, 6vw, 88px); }
+#Portofolio .MuiTabs-root, #Portofolio .MuiTabs-scroller,
+#Portofolio .MuiTabs-flexContainer, #Portofolio [role="tabpanel"] {
+  min-width: 0;
+  width: 100%;
+}
+#Portofolio .MuiTab-root { min-width: 0 !important; flex: 1 1 0; }
+#Portofolio [role="tabpanel"] { padding: clamp(18px, 3vw, 30px) 0 6px; }
+#Portofolio .portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(16px, 2.4vw, 26px);
+  width: 100%;
+  max-width: 1240px;
+  min-width: 0;
+  margin: 0 auto;
+}
+.portfolio-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(165, 180, 252, .19);
+  background: linear-gradient(155deg, rgba(30, 27, 75, .65), rgba(17, 24, 39, .82));
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 36px rgba(0, 0, 0, .15);
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.portfolio-card:hover { border-color: rgba(167, 139, 250, .55); transform: translateY(-3px); box-shadow: 0 14px 42px rgba(0, 0, 0, .25); }
+.portfolio-card__visual {
+  height: auto;
+  aspect-ratio: 16 / 10;
+  background: radial-gradient(ellipse at 50% 40%, #312e81 0%, #0f172a 75%);
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #a5b4fc;
+}
+.portfolio-card__visual > svg { width: 44px; height: 44px; opacity: .5; }
+.portfolio-card__image { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.portfolio-card__content { padding: 20px 21px 22px; display: flex; flex: 1; flex-direction: column; gap: 10px; }
+.portfolio-card__meta { font-size: .78rem; letter-spacing: .02em; color: #a5b4fc; font-weight: 600; }
+.portfolio-card__title { font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.45; font-weight: 650; color: #f8fafc; overflow-wrap: anywhere; }
+.portfolio-card__desc { color: #bac4d6; font-size: .89rem; line-height: 1.6; overflow-wrap: anywhere; }
+.portfolio-card__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.portfolio-card__tag { padding: 3px 9px; font-size: .73rem; border: 1px solid rgba(165,180,252,.21); border-radius: 999px; color: #c7d2fe; }
+.portfolio-card__actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: 9px; padding-top: 8px; }
+.portfolio-card__link { min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: #e9d5ff; font-size: .86rem; font-weight: 600; border: 1px solid rgba(167,139,250,.45); border-radius: 10px; padding: 8px 13px; background: rgba(139,92,246,.12); }
+.portfolio-card__link:hover, .portfolio-card__link:focus-visible { color: #fff; background: rgba(139,92,246,.25); outline: 2px solid rgba(196,181,253,.3); outline-offset: 2px; }
+.portfolio-empty { padding: clamp(36px, 6vw, 74px) 20px; text-align: center; background: rgba(15,23,42,.55); border: 1px dashed rgba(165,180,252,.28); border-radius: 16px; color: #cbd5e1; }
+.portfolio-empty > strong { display: block; color: #f1f5f9; font-size: 1.05rem; margin-bottom: 6px; }
+
+@media (min-width: 680px) {
+  #Portofolio .portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1200px) {
+  #Portofolio .portfolio-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  #Home .container { max-width: 1380px; padding-left: clamp(36px, 5vw, 96px); padding-right: clamp(36px, 5vw, 96px); }
+  #About { padding-bottom: 6%; }
+}
+@media (max-width: 680px) {
+  #Portofolio .MuiTab-root { font-size: .73rem !important; margin: 3px !important; padding: 11px 2px !important; }
+  #Portofolio .MuiTab-iconWrapper { margin-bottom: 4px !important; }
+  #Portofolio [role="tabpanel"] { padding-top: 18px; }
+  .portfolio-card__content { padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+  .portfolio-card { transition: none; }
+  #Portofolio [data-aos] { transition: none !important; }
+}
