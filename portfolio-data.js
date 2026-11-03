@@ -5,6 +5,7 @@
   const localCertificate = Object.freeze({
     id: 'wotd-festival-2024-local',
     title: 'Juara 2 - Lomba Infografis WOTD Festival 2024',
+    owner: 'Havidz Gading Fadhilla',
     issuer: 'HIMTO Universitas Indonesia',
     year: '2024',
     thumbnail: './certificates-preview.webp',
@@ -34,29 +35,10 @@
     }
   }
 
-  function readCache(key) {
-    if (key !== 'projects' && key !== 'certificates') return [];
-    try {
-      const value = JSON.parse(global.localStorage.getItem('portfolio:' + key) || global.localStorage.getItem(key) || '[]');
-      return Array.isArray(value) ? value.filter((item) => item && typeof item === 'object').slice(0, 150) : [];
-    } catch (_) {
-      return [];
-    }
-  }
-
-  function writeCache(key, data) {
-    if (key !== 'projects' && key !== 'certificates' || !Array.isArray(data)) return;
-    try {
-      global.localStorage.setItem('portfolio:' + key, JSON.stringify(data.slice(0, 150)));
-      // Keep the legacy key for the existing project-detail route.
-      global.localStorage.setItem(key, JSON.stringify(data.slice(0, 150)));
-    } catch (_) {
-      // Private browsing or storage restrictions must not prevent rendering.
-    }
-    if (typeof global.dispatchEvent === 'function' && typeof global.Event === 'function') {
-      global.dispatchEvent(new global.Event('portfolio-data-updated'));
-    }
-  }
+  // The public portfolio intentionally displays only the WOTD award.
+  // Older project/certificate data can remain on a visitor's device, but is never rendered.
+  function readCache(_key) { return []; }
+  function writeCache(_key, _data) { /* Additional items are disabled. */ }
 
   function getBasePath() {
     // Derive from the bundle location: works both at / and /repo-name/ on GitHub Pages.
